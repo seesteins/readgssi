@@ -293,11 +293,12 @@ def readdzt(infile, gps=DataFrame(), spm=None, start_scan=0, num_scans=-1,
 
 
     for i in range(header['rh_nchan']):
+        #TODO fix the bug here that causes incorract data import
         try:
             header['timezero'][i] = int(list(zero)[i])
         except (TypeError, IndexError):
-            fx.printmsg('WARNING: no time zero specified for channel %s, defaulting to rh_zero value (%s)' % (i, header['rh_zero']))
-            header['timezero'][i] = header['rh_zero']
+            fx.printmsg('WARNING: no time zero specified for channel %s, defaulting to rh_zero value (%s)' % (i, 0))
+            header['timezero'][i] = 0
 
     if os.path.isfile(infile_gps):
         try:
