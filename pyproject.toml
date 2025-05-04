@@ -1,17 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "readgssi"
-version = "0.1.0"
-description = "Add your description here"
+# Version is dynamic, read from _version.py via setup.py
+dynamic = ["version"]
+# Use the more detailed description from setup.py
+description = "Python tool to read and plot Geophysical Survey Systems Incorporated (GSSI) radar data in DZT format"
 readme = "README.md"
 requires-python = ">=3.11"
+license = { text = "AGPL-3.0-or-later" } # Using SPDX identifier for AGPL
+authors = [
+  { name = "Ian Nesbitt", email = "ian.nesbitt@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    # Classifier matching the license (AGPLv3+)
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: OS Independent",
+    "Framework :: Matplotlib",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Development Status :: 4 - Beta",
+]
 dependencies = [
+    # Consolidate dependencies here with versions
     "geopy>=2.4.1",
     "h5py>=3.13.0",
     "matplotlib>=3.10.1",
-    "numpy>=2.2.5",
+    "numpy>=2.2.5", # Make sure this meets your needs; >2 might break things
     "obspy>=1.4.2",
     "pandas>=2.2.3",
     "pynmea2>=1.19.0",
-    "pytz>=2025.2",
-    "scipy>=1.15.2",
+    "pytz>=2024.1", # Adjusted version slightly from original uv output
+    "scipy>=1.15.2", # Make sure this meets your needs
 ]
+
+[project.urls]
+# Use the URL from setup.py, assign it a key like "Homepage" or "Documentation"
+Documentation = "https://readgssi.readthedocs.org/"
+# Add repository URL if available, e.g.:
+# Repository = "https://github.com/your-username/readgssi"
+
+[project.scripts]
+# Define the console script here
+readgssi = "readgssi.readgssi:main"
+
+# Optional: Specify minimum setuptools version for dynamic version reading if needed
+# [tool.setuptools]
+# dynamic = ["version"] # Can sometimes help clarify dynamic fields
+
+# If _version.py is used, configure setuptools to find it (often automatic if simple)
+# [tool.setuptools.dynamic]
+# version = {attr = "readgssi._version.version"} # Explicitly point to the version attribute
